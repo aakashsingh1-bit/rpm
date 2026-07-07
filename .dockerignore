@@ -11,9 +11,8 @@ dist
 .env
 .env.*
 !.env.example
-Dockerfile
-docker-compose.yml
-Caddyfile
 .vscode
 .idea
 *.log
+bun.lock
+bunfig.toml
