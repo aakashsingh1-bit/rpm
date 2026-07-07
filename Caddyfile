@@ -1,7 +1,7 @@
 cad.sisgain.ae {
 	encode gzip zstd
 
-	reverse_proxy app:3000 {
+	reverse_proxy app:9098 {
 		health_uri /
 		health_interval 30s
 		health_timeout 5s

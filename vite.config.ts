@@ -17,7 +17,7 @@ export default defineConfig({
   ],
   server: {
     host: true,
-    port: 3000,
+    port: 9098,
   },
   preview: {
     host: "127.0.0.1",
