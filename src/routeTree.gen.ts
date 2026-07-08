@@ -29,6 +29,7 @@ import { Route as PortalAdminRouteImport } from './routes/portal.admin'
 import { Route as PortalHospitalIndexRouteImport } from './routes/portal.hospital.index'
 import { Route as PortalDispatchersIndexRouteImport } from './routes/portal.dispatchers.index'
 import { Route as PortalCrewIndexRouteImport } from './routes/portal.crew.index'
+import { Route as PortalCadIndexRouteImport } from './routes/portal.cad.index'
 import { Route as PortalBillingIndexRouteImport } from './routes/portal.billing.index'
 import { Route as PortalAdminIndexRouteImport } from './routes/portal.admin.index'
 import { Route as PortalHospitalReportsRouteImport } from './routes/portal.hospital.reports'
@@ -48,6 +49,11 @@ import { Route as PortalCrewCertificationsRouteImport } from './routes/portal.cr
 import { Route as PortalCrewAttendanceRouteImport } from './routes/portal.crew.attendance'
 import { Route as PortalCrewAssignmentsRouteImport } from './routes/portal.crew.assignments'
 import { Route as PortalCrewIdRouteImport } from './routes/portal.crew.$id'
+import { Route as PortalCadMessagesRouteImport } from './routes/portal.cad.messages'
+import { Route as PortalCadHospitalRouteImport } from './routes/portal.cad.hospital'
+import { Route as PortalCadFleetRouteImport } from './routes/portal.cad.fleet'
+import { Route as PortalCadDispatchersRouteImport } from './routes/portal.cad.dispatchers'
+import { Route as PortalCadCallsRouteImport } from './routes/portal.cad.calls'
 import { Route as PortalBillingSettingsRouteImport } from './routes/portal.billing.settings'
 import { Route as PortalBillingReportsRouteImport } from './routes/portal.billing.reports'
 import { Route as PortalBillingPaymentsRouteImport } from './routes/portal.billing.payments'
@@ -66,6 +72,8 @@ import { Route as PortalAdminModulesRouteImport } from './routes/portal.admin.mo
 import { Route as PortalAdminMasterRouteImport } from './routes/portal.admin.master'
 import { Route as PortalAdminIntegrationsRouteImport } from './routes/portal.admin.integrations'
 import { Route as PortalAdminAuditRouteImport } from './routes/portal.admin.audit'
+import { Route as PortalCadCallsIndexRouteImport } from './routes/portal.cad.calls.index'
+import { Route as PortalCadCallsActiveRouteImport } from './routes/portal.cad.calls.active'
 
 const PortalRoute = PortalRouteImport.update({
   id: '/portal',
@@ -167,6 +175,11 @@ const PortalCrewIndexRoute = PortalCrewIndexRouteImport.update({
   path: '/',
   getParentRoute: () => PortalCrewRoute,
 } as any)
+const PortalCadIndexRoute = PortalCadIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PortalCadRoute,
+} as any)
 const PortalBillingIndexRoute = PortalBillingIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -266,6 +279,31 @@ const PortalCrewIdRoute = PortalCrewIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => PortalCrewRoute,
 } as any)
+const PortalCadMessagesRoute = PortalCadMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => PortalCadRoute,
+} as any)
+const PortalCadHospitalRoute = PortalCadHospitalRouteImport.update({
+  id: '/hospital',
+  path: '/hospital',
+  getParentRoute: () => PortalCadRoute,
+} as any)
+const PortalCadFleetRoute = PortalCadFleetRouteImport.update({
+  id: '/fleet',
+  path: '/fleet',
+  getParentRoute: () => PortalCadRoute,
+} as any)
+const PortalCadDispatchersRoute = PortalCadDispatchersRouteImport.update({
+  id: '/dispatchers',
+  path: '/dispatchers',
+  getParentRoute: () => PortalCadRoute,
+} as any)
+const PortalCadCallsRoute = PortalCadCallsRouteImport.update({
+  id: '/calls',
+  path: '/calls',
+  getParentRoute: () => PortalCadRoute,
+} as any)
 const PortalBillingSettingsRoute = PortalBillingSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -358,6 +396,16 @@ const PortalAdminAuditRoute = PortalAdminAuditRouteImport.update({
   path: '/audit',
   getParentRoute: () => PortalAdminRoute,
 } as any)
+const PortalCadCallsIndexRoute = PortalCadCallsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PortalCadCallsRoute,
+} as any)
+const PortalCadCallsActiveRoute = PortalCadCallsActiveRouteImport.update({
+  id: '/active',
+  path: '/active',
+  getParentRoute: () => PortalCadCallsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -367,7 +415,7 @@ export interface FileRoutesByFullPath {
   '/portal/admin': typeof PortalAdminRouteWithChildren
   '/portal/analytics': typeof PortalAnalyticsRoute
   '/portal/billing': typeof PortalBillingRouteWithChildren
-  '/portal/cad': typeof PortalCadRoute
+  '/portal/cad': typeof PortalCadRouteWithChildren
   '/portal/calls': typeof PortalCallsRoute
   '/portal/crew': typeof PortalCrewRouteWithChildren
   '/portal/dispatchers': typeof PortalDispatchersRouteWithChildren
@@ -395,6 +443,11 @@ export interface FileRoutesByFullPath {
   '/portal/billing/payments': typeof PortalBillingPaymentsRoute
   '/portal/billing/reports': typeof PortalBillingReportsRoute
   '/portal/billing/settings': typeof PortalBillingSettingsRoute
+  '/portal/cad/calls': typeof PortalCadCallsRouteWithChildren
+  '/portal/cad/dispatchers': typeof PortalCadDispatchersRoute
+  '/portal/cad/fleet': typeof PortalCadFleetRoute
+  '/portal/cad/hospital': typeof PortalCadHospitalRoute
+  '/portal/cad/messages': typeof PortalCadMessagesRoute
   '/portal/crew/$id': typeof PortalCrewIdRoute
   '/portal/crew/assignments': typeof PortalCrewAssignmentsRoute
   '/portal/crew/attendance': typeof PortalCrewAttendanceRoute
@@ -414,16 +467,18 @@ export interface FileRoutesByFullPath {
   '/portal/hospital/reports': typeof PortalHospitalReportsRoute
   '/portal/admin/': typeof PortalAdminIndexRoute
   '/portal/billing/': typeof PortalBillingIndexRoute
+  '/portal/cad/': typeof PortalCadIndexRoute
   '/portal/crew/': typeof PortalCrewIndexRoute
   '/portal/dispatchers/': typeof PortalDispatchersIndexRoute
   '/portal/hospital/': typeof PortalHospitalIndexRoute
+  '/portal/cad/calls/active': typeof PortalCadCallsActiveRoute
+  '/portal/cad/calls/': typeof PortalCadCallsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/crew-app': typeof CrewAppRoute
   '/login': typeof LoginRoute
   '/portal/analytics': typeof PortalAnalyticsRoute
-  '/portal/cad': typeof PortalCadRoute
   '/portal/calls': typeof PortalCallsRoute
   '/portal/epcr': typeof PortalEpcrRoute
   '/portal/fleet': typeof PortalFleetRoute
@@ -448,6 +503,10 @@ export interface FileRoutesByTo {
   '/portal/billing/payments': typeof PortalBillingPaymentsRoute
   '/portal/billing/reports': typeof PortalBillingReportsRoute
   '/portal/billing/settings': typeof PortalBillingSettingsRoute
+  '/portal/cad/dispatchers': typeof PortalCadDispatchersRoute
+  '/portal/cad/fleet': typeof PortalCadFleetRoute
+  '/portal/cad/hospital': typeof PortalCadHospitalRoute
+  '/portal/cad/messages': typeof PortalCadMessagesRoute
   '/portal/crew/$id': typeof PortalCrewIdRoute
   '/portal/crew/assignments': typeof PortalCrewAssignmentsRoute
   '/portal/crew/attendance': typeof PortalCrewAttendanceRoute
@@ -467,9 +526,12 @@ export interface FileRoutesByTo {
   '/portal/hospital/reports': typeof PortalHospitalReportsRoute
   '/portal/admin': typeof PortalAdminIndexRoute
   '/portal/billing': typeof PortalBillingIndexRoute
+  '/portal/cad': typeof PortalCadIndexRoute
   '/portal/crew': typeof PortalCrewIndexRoute
   '/portal/dispatchers': typeof PortalDispatchersIndexRoute
   '/portal/hospital': typeof PortalHospitalIndexRoute
+  '/portal/cad/calls/active': typeof PortalCadCallsActiveRoute
+  '/portal/cad/calls': typeof PortalCadCallsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -480,7 +542,7 @@ export interface FileRoutesById {
   '/portal/admin': typeof PortalAdminRouteWithChildren
   '/portal/analytics': typeof PortalAnalyticsRoute
   '/portal/billing': typeof PortalBillingRouteWithChildren
-  '/portal/cad': typeof PortalCadRoute
+  '/portal/cad': typeof PortalCadRouteWithChildren
   '/portal/calls': typeof PortalCallsRoute
   '/portal/crew': typeof PortalCrewRouteWithChildren
   '/portal/dispatchers': typeof PortalDispatchersRouteWithChildren
@@ -508,6 +570,11 @@ export interface FileRoutesById {
   '/portal/billing/payments': typeof PortalBillingPaymentsRoute
   '/portal/billing/reports': typeof PortalBillingReportsRoute
   '/portal/billing/settings': typeof PortalBillingSettingsRoute
+  '/portal/cad/calls': typeof PortalCadCallsRouteWithChildren
+  '/portal/cad/dispatchers': typeof PortalCadDispatchersRoute
+  '/portal/cad/fleet': typeof PortalCadFleetRoute
+  '/portal/cad/hospital': typeof PortalCadHospitalRoute
+  '/portal/cad/messages': typeof PortalCadMessagesRoute
   '/portal/crew/$id': typeof PortalCrewIdRoute
   '/portal/crew/assignments': typeof PortalCrewAssignmentsRoute
   '/portal/crew/attendance': typeof PortalCrewAttendanceRoute
@@ -527,9 +594,12 @@ export interface FileRoutesById {
   '/portal/hospital/reports': typeof PortalHospitalReportsRoute
   '/portal/admin/': typeof PortalAdminIndexRoute
   '/portal/billing/': typeof PortalBillingIndexRoute
+  '/portal/cad/': typeof PortalCadIndexRoute
   '/portal/crew/': typeof PortalCrewIndexRoute
   '/portal/dispatchers/': typeof PortalDispatchersIndexRoute
   '/portal/hospital/': typeof PortalHospitalIndexRoute
+  '/portal/cad/calls/active': typeof PortalCadCallsActiveRoute
+  '/portal/cad/calls/': typeof PortalCadCallsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -569,6 +639,11 @@ export interface FileRouteTypes {
     | '/portal/billing/payments'
     | '/portal/billing/reports'
     | '/portal/billing/settings'
+    | '/portal/cad/calls'
+    | '/portal/cad/dispatchers'
+    | '/portal/cad/fleet'
+    | '/portal/cad/hospital'
+    | '/portal/cad/messages'
     | '/portal/crew/$id'
     | '/portal/crew/assignments'
     | '/portal/crew/attendance'
@@ -588,16 +663,18 @@ export interface FileRouteTypes {
     | '/portal/hospital/reports'
     | '/portal/admin/'
     | '/portal/billing/'
+    | '/portal/cad/'
     | '/portal/crew/'
     | '/portal/dispatchers/'
     | '/portal/hospital/'
+    | '/portal/cad/calls/active'
+    | '/portal/cad/calls/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/crew-app'
     | '/login'
     | '/portal/analytics'
-    | '/portal/cad'
     | '/portal/calls'
     | '/portal/epcr'
     | '/portal/fleet'
@@ -622,6 +699,10 @@ export interface FileRouteTypes {
     | '/portal/billing/payments'
     | '/portal/billing/reports'
     | '/portal/billing/settings'
+    | '/portal/cad/dispatchers'
+    | '/portal/cad/fleet'
+    | '/portal/cad/hospital'
+    | '/portal/cad/messages'
     | '/portal/crew/$id'
     | '/portal/crew/assignments'
     | '/portal/crew/attendance'
@@ -641,9 +722,12 @@ export interface FileRouteTypes {
     | '/portal/hospital/reports'
     | '/portal/admin'
     | '/portal/billing'
+    | '/portal/cad'
     | '/portal/crew'
     | '/portal/dispatchers'
     | '/portal/hospital'
+    | '/portal/cad/calls/active'
+    | '/portal/cad/calls'
   id:
     | '__root__'
     | '/'
@@ -681,6 +765,11 @@ export interface FileRouteTypes {
     | '/portal/billing/payments'
     | '/portal/billing/reports'
     | '/portal/billing/settings'
+    | '/portal/cad/calls'
+    | '/portal/cad/dispatchers'
+    | '/portal/cad/fleet'
+    | '/portal/cad/hospital'
+    | '/portal/cad/messages'
     | '/portal/crew/$id'
     | '/portal/crew/assignments'
     | '/portal/crew/attendance'
@@ -700,9 +789,12 @@ export interface FileRouteTypes {
     | '/portal/hospital/reports'
     | '/portal/admin/'
     | '/portal/billing/'
+    | '/portal/cad/'
     | '/portal/crew/'
     | '/portal/dispatchers/'
     | '/portal/hospital/'
+    | '/portal/cad/calls/active'
+    | '/portal/cad/calls/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -854,6 +946,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalCrewIndexRouteImport
       parentRoute: typeof PortalCrewRoute
     }
+    '/portal/cad/': {
+      id: '/portal/cad/'
+      path: '/'
+      fullPath: '/portal/cad/'
+      preLoaderRoute: typeof PortalCadIndexRouteImport
+      parentRoute: typeof PortalCadRoute
+    }
     '/portal/billing/': {
       id: '/portal/billing/'
       path: '/'
@@ -987,6 +1086,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalCrewIdRouteImport
       parentRoute: typeof PortalCrewRoute
     }
+    '/portal/cad/messages': {
+      id: '/portal/cad/messages'
+      path: '/messages'
+      fullPath: '/portal/cad/messages'
+      preLoaderRoute: typeof PortalCadMessagesRouteImport
+      parentRoute: typeof PortalCadRoute
+    }
+    '/portal/cad/hospital': {
+      id: '/portal/cad/hospital'
+      path: '/hospital'
+      fullPath: '/portal/cad/hospital'
+      preLoaderRoute: typeof PortalCadHospitalRouteImport
+      parentRoute: typeof PortalCadRoute
+    }
+    '/portal/cad/fleet': {
+      id: '/portal/cad/fleet'
+      path: '/fleet'
+      fullPath: '/portal/cad/fleet'
+      preLoaderRoute: typeof PortalCadFleetRouteImport
+      parentRoute: typeof PortalCadRoute
+    }
+    '/portal/cad/dispatchers': {
+      id: '/portal/cad/dispatchers'
+      path: '/dispatchers'
+      fullPath: '/portal/cad/dispatchers'
+      preLoaderRoute: typeof PortalCadDispatchersRouteImport
+      parentRoute: typeof PortalCadRoute
+    }
+    '/portal/cad/calls': {
+      id: '/portal/cad/calls'
+      path: '/calls'
+      fullPath: '/portal/cad/calls'
+      preLoaderRoute: typeof PortalCadCallsRouteImport
+      parentRoute: typeof PortalCadRoute
+    }
     '/portal/billing/settings': {
       id: '/portal/billing/settings'
       path: '/settings'
@@ -1113,6 +1247,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalAdminAuditRouteImport
       parentRoute: typeof PortalAdminRoute
     }
+    '/portal/cad/calls/': {
+      id: '/portal/cad/calls/'
+      path: '/'
+      fullPath: '/portal/cad/calls/'
+      preLoaderRoute: typeof PortalCadCallsIndexRouteImport
+      parentRoute: typeof PortalCadCallsRoute
+    }
+    '/portal/cad/calls/active': {
+      id: '/portal/cad/calls/active'
+      path: '/active'
+      fullPath: '/portal/cad/calls/active'
+      preLoaderRoute: typeof PortalCadCallsActiveRouteImport
+      parentRoute: typeof PortalCadCallsRoute
+    }
   }
 }
 
@@ -1174,6 +1322,42 @@ const PortalBillingRouteChildren: PortalBillingRouteChildren = {
 
 const PortalBillingRouteWithChildren = PortalBillingRoute._addFileChildren(
   PortalBillingRouteChildren,
+)
+
+interface PortalCadCallsRouteChildren {
+  PortalCadCallsActiveRoute: typeof PortalCadCallsActiveRoute
+  PortalCadCallsIndexRoute: typeof PortalCadCallsIndexRoute
+}
+
+const PortalCadCallsRouteChildren: PortalCadCallsRouteChildren = {
+  PortalCadCallsActiveRoute: PortalCadCallsActiveRoute,
+  PortalCadCallsIndexRoute: PortalCadCallsIndexRoute,
+}
+
+const PortalCadCallsRouteWithChildren = PortalCadCallsRoute._addFileChildren(
+  PortalCadCallsRouteChildren,
+)
+
+interface PortalCadRouteChildren {
+  PortalCadCallsRoute: typeof PortalCadCallsRouteWithChildren
+  PortalCadDispatchersRoute: typeof PortalCadDispatchersRoute
+  PortalCadFleetRoute: typeof PortalCadFleetRoute
+  PortalCadHospitalRoute: typeof PortalCadHospitalRoute
+  PortalCadMessagesRoute: typeof PortalCadMessagesRoute
+  PortalCadIndexRoute: typeof PortalCadIndexRoute
+}
+
+const PortalCadRouteChildren: PortalCadRouteChildren = {
+  PortalCadCallsRoute: PortalCadCallsRouteWithChildren,
+  PortalCadDispatchersRoute: PortalCadDispatchersRoute,
+  PortalCadFleetRoute: PortalCadFleetRoute,
+  PortalCadHospitalRoute: PortalCadHospitalRoute,
+  PortalCadMessagesRoute: PortalCadMessagesRoute,
+  PortalCadIndexRoute: PortalCadIndexRoute,
+}
+
+const PortalCadRouteWithChildren = PortalCadRoute._addFileChildren(
+  PortalCadRouteChildren,
 )
 
 interface PortalCrewRouteChildren {
@@ -1249,7 +1433,7 @@ interface PortalRouteChildren {
   PortalAdminRoute: typeof PortalAdminRouteWithChildren
   PortalAnalyticsRoute: typeof PortalAnalyticsRoute
   PortalBillingRoute: typeof PortalBillingRouteWithChildren
-  PortalCadRoute: typeof PortalCadRoute
+  PortalCadRoute: typeof PortalCadRouteWithChildren
   PortalCallsRoute: typeof PortalCallsRoute
   PortalCrewRoute: typeof PortalCrewRouteWithChildren
   PortalDispatchersRoute: typeof PortalDispatchersRouteWithChildren
@@ -1265,7 +1449,7 @@ const PortalRouteChildren: PortalRouteChildren = {
   PortalAdminRoute: PortalAdminRouteWithChildren,
   PortalAnalyticsRoute: PortalAnalyticsRoute,
   PortalBillingRoute: PortalBillingRouteWithChildren,
-  PortalCadRoute: PortalCadRoute,
+  PortalCadRoute: PortalCadRouteWithChildren,
   PortalCallsRoute: PortalCallsRoute,
   PortalCrewRoute: PortalCrewRouteWithChildren,
   PortalDispatchersRoute: PortalDispatchersRouteWithChildren,
@@ -1289,3 +1473,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

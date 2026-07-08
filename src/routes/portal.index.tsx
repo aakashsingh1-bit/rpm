@@ -1,5 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
   Activity,
@@ -12,9 +11,11 @@ import {
   Users,
 } from "lucide-react";
 import { useAuth, useRoleDef } from "@/lib/auth";
-import { DISPATCHERS as dispatchers } from "@/lib/dispatchers";
 import { StatCard, Panel, DynIcon } from "@/components/portal/Module";
 import { MODULES, type ModuleKey } from "@/lib/rbac";
+import { CadShell } from "@/components/portal/cad/CadShell";
+import { CadDashboard } from "@/components/portal/cad/CadDashboard";
+import { OpsDashboard } from "@/components/portal/cad/OpsDashboard";
 import { Link } from "@tanstack/react-router";
 import {
   Area,
@@ -42,22 +43,26 @@ const liveIncidents = [
   { id: "INC-8838", p: "P2", type: "Fall injury", loc: "Marina Mall", crew: "A-09", eta: "00:00", state: "Handover" },
 ];
 
-
-
 function Dashboard() {
   const { session } = useAuth();
   const role = useRoleDef();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (role && !role.modules.includes("dashboard")) {
-      const first = role.modules[0];
-      if (first) navigate({ to: MODULES[first].path, replace: true });
-    }
-  }, [role, navigate]);
-
   if (!session || !role) return null;
-  if (!role.modules.includes("dashboard")) return null;
+
+  if (session.role === "dispatcher") {
+    return (
+      <CadShell>
+        <CadDashboard />
+      </CadShell>
+    );
+  }
+
+  if (session.role === "ops_manager") {
+    return (
+      <CadShell>
+        <OpsDashboard />
+      </CadShell>
+    );
+  }
 
   const allowed = role.modules.filter((m) => m !== "dashboard") as ModuleKey[];
 
@@ -126,33 +131,26 @@ function Dashboard() {
                   initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.04 * idx }}
+                  className="flex items-center gap-4 px-5 py-3 hover:bg-accent/30 transition-colors"
                 >
-                  <Link
-                    to="/portal/cad"
-                    className="flex items-center gap-4 px-5 py-3 hover:bg-accent/40 transition-colors group"
+                  <span
+                    className={`text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded border ${color}`}
                   >
-                    <span
-                      className={`text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded border ${color}`}
-                    >
-                      {i.p}
+                    {i.p}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-medium truncate">{i.type}</div>
+                    <div className="text-xs text-muted-foreground truncate">{i.loc}</div>
+                  </div>
+                  <div className="hidden md:block text-xs font-mono text-muted-foreground">
+                    {i.crew}
+                  </div>
+                  <div className="hidden md:block text-xs">
+                    <span className="inline-block px-2 py-0.5 rounded-full bg-surface border border-border text-muted-foreground">
+                      {i.state}
                     </span>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm font-medium truncate group-hover:text-primary transition-colors">
-                        <span className="text-[10px] font-mono text-muted-foreground mr-2">{i.id}</span>
-                        {i.type}
-                      </div>
-                      <div className="text-xs text-muted-foreground truncate">{i.loc}</div>
-                    </div>
-                    <div className="hidden md:block text-xs font-mono text-muted-foreground">
-                      {i.crew}
-                    </div>
-                    <div className="hidden md:block text-xs">
-                      <span className="inline-block px-2 py-0.5 rounded-full bg-surface border border-border text-muted-foreground">
-                        {i.state}
-                      </span>
-                    </div>
-                    <div className="text-sm font-mono tabular-nums text-foreground">{i.eta}</div>
-                  </Link>
+                  </div>
+                  <div className="text-sm font-mono tabular-nums text-foreground">{i.eta}</div>
                 </motion.div>
               );
             })}
@@ -194,70 +192,6 @@ function Dashboard() {
           </div>
         </Panel>
       </div>
-
-      {/* Dispatchers on duty */}
-      {(role.key === "super_admin" || role.key === "ops_manager") && (
-        <Panel
-          title="Dispatchers on duty"
-          subtitle="Live desk activity · location · calls taken this shift"
-          actions={
-            <Link to="/portal/dispatchers" className="text-[10px] font-mono uppercase tracking-widest text-primary hover:underline">
-              Open dispatchers →
-            </Link>
-          }
-        >
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
-            {dispatchers.map((d, i) => (
-              <motion.div
-                key={d.id}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.04 * i }}
-              >
-                <Link
-                  to="/portal/dispatchers/$id"
-                  params={{ id: d.id }}
-                  className="block rounded-lg border border-border bg-surface/50 p-3 hover:border-primary/60 hover:shadow-elegant transition-all"
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="h-8 w-8 rounded-full bg-gradient-primary grid place-items-center text-primary-foreground text-xs font-semibold">
-                      {d.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm font-semibold truncate">{d.name}</div>
-                      <div className="text-[10px] text-muted-foreground truncate">{d.location} · {d.desk}</div>
-                    </div>
-                    <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${
-                      d.status === "On call"
-                        ? "text-primary border-primary/40 bg-primary/10"
-                        : d.status === "Available"
-                          ? "text-success border-success/40 bg-success/10"
-                          : "text-muted-foreground border-border bg-surface"
-                    }`}>
-                      {d.status}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2 text-center pt-2 border-t border-border/60">
-                    <div>
-                      <div className="text-lg font-display font-semibold tabular-nums">{d.calls}</div>
-                      <div className="text-[9px] uppercase tracking-widest text-muted-foreground">Calls</div>
-                    </div>
-                    <div>
-                      <div className="text-xs font-mono truncate">{d.active}</div>
-                      <div className="text-[9px] uppercase tracking-widest text-muted-foreground">Active</div>
-                    </div>
-                    <div>
-                      <div className="text-xs font-mono">{d.channel}</div>
-                      <div className="text-[9px] uppercase tracking-widest text-muted-foreground">Radio</div>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </Panel>
-      )}
-
 
       {/* Module grid */}
       <div>

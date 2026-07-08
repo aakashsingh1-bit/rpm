@@ -245,7 +245,7 @@ function LoginPage() {
         <div className="relative z-10 h-full flex flex-col items-center px-6 xl:px-10 overflow-y-auto">
           {/* Logo at the very top, centered */}
           <div className="pt-4 pb-4 w-full flex justify-center">
-            <img src={LOGO_URL} alt="RPM EMS Command" className="h-20 w-auto max-w-[320px] object-contain" />
+            <img src={LOGO_URL} alt="Response Plus Holding PJSC" className="h-16 w-auto max-w-[300px] object-contain" />
           </div>
 
           {/* Content starts from the top, centered */}
