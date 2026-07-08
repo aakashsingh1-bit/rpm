@@ -8,7 +8,7 @@ import { CREW_TABS } from "@/lib/crew-data";
 import { HOSPITAL_TABS } from "@/lib/hospital-data";
 import { FINANCE_TABS } from "@/lib/finance-data";
 
-import { LOGO_WHITE_URL } from "@/lib/assets";
+import { LOGO_URL } from "@/lib/assets";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -35,15 +35,7 @@ export function PortalShell({ children }: { children: ReactNode }) {
       {/* Sidebar */}
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-white/10 bg-gradient-dark-nav text-sidebar-foreground lg:flex">
         <div className="flex flex-col items-start gap-3 px-5 py-5 border-b border-white/10">
-          <img src={LOGO_WHITE_URL} alt="RPM Holding" className="h-10 w-auto object-contain" />
-          <div className="leading-none">
-            <div className="font-display font-bold tracking-tight text-white text-[22px]">
-              EMS <span className="font-semibold text-white/85">Command</span>
-            </div>
-            <div className="text-[10px] uppercase tracking-[0.24em] text-white/60 mt-1.5">
-              Platform
-            </div>
-          </div>
+          <img src={LOGO_URL} alt="RPM EMS Command" className="w-full max-w-[220px] h-auto object-contain" />
         </div>
 
 

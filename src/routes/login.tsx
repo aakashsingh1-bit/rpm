@@ -14,7 +14,7 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
 } from "@/components/ui/dialog";
 import { ECGLifeline } from "@/components/ECGLifeline";
-import { LOGO_WHITE_URL } from "@/lib/assets";
+import { LOGO_URL } from "@/lib/assets";
 import { toast } from "sonner";
 
 const roleIcons: Record<Role, string> = {
@@ -245,7 +245,7 @@ function LoginPage() {
         <div className="relative z-10 h-full flex flex-col items-center px-6 xl:px-10 overflow-y-auto">
           {/* Logo at the very top, centered */}
           <div className="pt-4 pb-4 w-full flex justify-center">
-            <img src={LOGO_WHITE_URL} alt="RPM" className="h-10 w-auto object-contain" />
+            <img src={LOGO_URL} alt="RPM EMS Command" className="h-20 w-auto max-w-[320px] object-contain" />
           </div>
 
           {/* Content starts from the top, centered */}

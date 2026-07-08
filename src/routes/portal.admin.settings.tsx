@@ -15,7 +15,7 @@ export const Route = createFileRoute("/portal/admin/settings")({
 function SettingsPage() {
   const [s, setS] = useState({
     company: "RPM Holding",
-    logo: "rpm-logo-white.png",
+    logo: "logo.png",
     language: "English",
     dateFormat: "DD MMM YYYY",
     timezone: "Asia/Dubai",

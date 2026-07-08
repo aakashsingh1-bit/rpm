@@ -4,7 +4,7 @@ import { ArrowRight, ShieldCheck, Activity, Radio, HeartPulse } from "lucide-rea
 import * as Icons from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { ROLE_LIST, type Role } from "@/lib/rbac";
-import { LOGO_WHITE_URL } from "@/lib/assets";
+import { LOGO_URL } from "@/lib/assets";
 import { Button } from "@/components/ui/button";
 import { ECGLifeline } from "@/components/ECGLifeline";
 import { useEffect } from "react";
@@ -52,15 +52,7 @@ function Landing() {
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-brand opacity-70" />
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-10 py-5">
           <div className="flex flex-col items-start gap-2">
-            <img src={LOGO_WHITE_URL} alt="RPM Holding" className="h-10 w-auto object-contain" />
-            <div>
-              <div className="text-sm font-display font-semibold leading-none text-white">
-                EMS Command
-              </div>
-              <div className="text-[10px] uppercase tracking-[0.18em] text-white/60 mt-1">
-                Enterprise CAD · Response Plus
-              </div>
-            </div>
+          <img src={LOGO_URL} alt="RPM EMS Command" className="h-16 w-auto max-w-[280px] object-contain" />
           </div>
 
           <nav className="hidden md:flex items-center gap-6 text-sm text-white/80">
