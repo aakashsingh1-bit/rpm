@@ -64,6 +64,7 @@ import { Route as PortalAdminWorkflowRouteImport } from './routes/portal.admin.w
 import { Route as PortalAdminUsersRouteImport } from './routes/portal.admin.users'
 import { Route as PortalAdminSettingsRouteImport } from './routes/portal.admin.settings'
 import { Route as PortalAdminRolesRouteImport } from './routes/portal.admin.roles'
+import { Route as PortalAdminRoadmapRouteImport } from './routes/portal.admin.roadmap'
 import { Route as PortalAdminReportsRouteImport } from './routes/portal.admin.reports'
 import { Route as PortalAdminProfileRouteImport } from './routes/portal.admin.profile'
 import { Route as PortalAdminOrganizationsRouteImport } from './routes/portal.admin.organizations'
@@ -71,6 +72,7 @@ import { Route as PortalAdminNotificationsRouteImport } from './routes/portal.ad
 import { Route as PortalAdminModulesRouteImport } from './routes/portal.admin.modules'
 import { Route as PortalAdminMasterRouteImport } from './routes/portal.admin.master'
 import { Route as PortalAdminIntegrationsRouteImport } from './routes/portal.admin.integrations'
+import { Route as PortalAdminComplianceRouteImport } from './routes/portal.admin.compliance'
 import { Route as PortalAdminAuditRouteImport } from './routes/portal.admin.audit'
 import { Route as PortalCadCallsIndexRouteImport } from './routes/portal.cad.calls.index'
 import { Route as PortalCadCallsActiveRouteImport } from './routes/portal.cad.calls.active'
@@ -354,6 +356,11 @@ const PortalAdminRolesRoute = PortalAdminRolesRouteImport.update({
   path: '/roles',
   getParentRoute: () => PortalAdminRoute,
 } as any)
+const PortalAdminRoadmapRoute = PortalAdminRoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => PortalAdminRoute,
+} as any)
 const PortalAdminReportsRoute = PortalAdminReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
@@ -391,6 +398,11 @@ const PortalAdminIntegrationsRoute = PortalAdminIntegrationsRouteImport.update({
   path: '/integrations',
   getParentRoute: () => PortalAdminRoute,
 } as any)
+const PortalAdminComplianceRoute = PortalAdminComplianceRouteImport.update({
+  id: '/compliance',
+  path: '/compliance',
+  getParentRoute: () => PortalAdminRoute,
+} as any)
 const PortalAdminAuditRoute = PortalAdminAuditRouteImport.update({
   id: '/audit',
   path: '/audit',
@@ -426,6 +438,7 @@ export interface FileRoutesByFullPath {
   '/portal/users': typeof PortalUsersRoute
   '/portal/': typeof PortalIndexRoute
   '/portal/admin/audit': typeof PortalAdminAuditRoute
+  '/portal/admin/compliance': typeof PortalAdminComplianceRoute
   '/portal/admin/integrations': typeof PortalAdminIntegrationsRoute
   '/portal/admin/master': typeof PortalAdminMasterRoute
   '/portal/admin/modules': typeof PortalAdminModulesRoute
@@ -433,6 +446,7 @@ export interface FileRoutesByFullPath {
   '/portal/admin/organizations': typeof PortalAdminOrganizationsRoute
   '/portal/admin/profile': typeof PortalAdminProfileRoute
   '/portal/admin/reports': typeof PortalAdminReportsRoute
+  '/portal/admin/roadmap': typeof PortalAdminRoadmapRoute
   '/portal/admin/roles': typeof PortalAdminRolesRoute
   '/portal/admin/settings': typeof PortalAdminSettingsRoute
   '/portal/admin/users': typeof PortalAdminUsersRoute
@@ -486,6 +500,7 @@ export interface FileRoutesByTo {
   '/portal/users': typeof PortalUsersRoute
   '/portal': typeof PortalIndexRoute
   '/portal/admin/audit': typeof PortalAdminAuditRoute
+  '/portal/admin/compliance': typeof PortalAdminComplianceRoute
   '/portal/admin/integrations': typeof PortalAdminIntegrationsRoute
   '/portal/admin/master': typeof PortalAdminMasterRoute
   '/portal/admin/modules': typeof PortalAdminModulesRoute
@@ -493,6 +508,7 @@ export interface FileRoutesByTo {
   '/portal/admin/organizations': typeof PortalAdminOrganizationsRoute
   '/portal/admin/profile': typeof PortalAdminProfileRoute
   '/portal/admin/reports': typeof PortalAdminReportsRoute
+  '/portal/admin/roadmap': typeof PortalAdminRoadmapRoute
   '/portal/admin/roles': typeof PortalAdminRolesRoute
   '/portal/admin/settings': typeof PortalAdminSettingsRoute
   '/portal/admin/users': typeof PortalAdminUsersRoute
@@ -553,6 +569,7 @@ export interface FileRoutesById {
   '/portal/users': typeof PortalUsersRoute
   '/portal/': typeof PortalIndexRoute
   '/portal/admin/audit': typeof PortalAdminAuditRoute
+  '/portal/admin/compliance': typeof PortalAdminComplianceRoute
   '/portal/admin/integrations': typeof PortalAdminIntegrationsRoute
   '/portal/admin/master': typeof PortalAdminMasterRoute
   '/portal/admin/modules': typeof PortalAdminModulesRoute
@@ -560,6 +577,7 @@ export interface FileRoutesById {
   '/portal/admin/organizations': typeof PortalAdminOrganizationsRoute
   '/portal/admin/profile': typeof PortalAdminProfileRoute
   '/portal/admin/reports': typeof PortalAdminReportsRoute
+  '/portal/admin/roadmap': typeof PortalAdminRoadmapRoute
   '/portal/admin/roles': typeof PortalAdminRolesRoute
   '/portal/admin/settings': typeof PortalAdminSettingsRoute
   '/portal/admin/users': typeof PortalAdminUsersRoute
@@ -622,6 +640,7 @@ export interface FileRouteTypes {
     | '/portal/users'
     | '/portal/'
     | '/portal/admin/audit'
+    | '/portal/admin/compliance'
     | '/portal/admin/integrations'
     | '/portal/admin/master'
     | '/portal/admin/modules'
@@ -629,6 +648,7 @@ export interface FileRouteTypes {
     | '/portal/admin/organizations'
     | '/portal/admin/profile'
     | '/portal/admin/reports'
+    | '/portal/admin/roadmap'
     | '/portal/admin/roles'
     | '/portal/admin/settings'
     | '/portal/admin/users'
@@ -682,6 +702,7 @@ export interface FileRouteTypes {
     | '/portal/users'
     | '/portal'
     | '/portal/admin/audit'
+    | '/portal/admin/compliance'
     | '/portal/admin/integrations'
     | '/portal/admin/master'
     | '/portal/admin/modules'
@@ -689,6 +710,7 @@ export interface FileRouteTypes {
     | '/portal/admin/organizations'
     | '/portal/admin/profile'
     | '/portal/admin/reports'
+    | '/portal/admin/roadmap'
     | '/portal/admin/roles'
     | '/portal/admin/settings'
     | '/portal/admin/users'
@@ -748,6 +770,7 @@ export interface FileRouteTypes {
     | '/portal/users'
     | '/portal/'
     | '/portal/admin/audit'
+    | '/portal/admin/compliance'
     | '/portal/admin/integrations'
     | '/portal/admin/master'
     | '/portal/admin/modules'
@@ -755,6 +778,7 @@ export interface FileRouteTypes {
     | '/portal/admin/organizations'
     | '/portal/admin/profile'
     | '/portal/admin/reports'
+    | '/portal/admin/roadmap'
     | '/portal/admin/roles'
     | '/portal/admin/settings'
     | '/portal/admin/users'
@@ -1191,6 +1215,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalAdminRolesRouteImport
       parentRoute: typeof PortalAdminRoute
     }
+    '/portal/admin/roadmap': {
+      id: '/portal/admin/roadmap'
+      path: '/roadmap'
+      fullPath: '/portal/admin/roadmap'
+      preLoaderRoute: typeof PortalAdminRoadmapRouteImport
+      parentRoute: typeof PortalAdminRoute
+    }
     '/portal/admin/reports': {
       id: '/portal/admin/reports'
       path: '/reports'
@@ -1240,6 +1271,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalAdminIntegrationsRouteImport
       parentRoute: typeof PortalAdminRoute
     }
+    '/portal/admin/compliance': {
+      id: '/portal/admin/compliance'
+      path: '/compliance'
+      fullPath: '/portal/admin/compliance'
+      preLoaderRoute: typeof PortalAdminComplianceRouteImport
+      parentRoute: typeof PortalAdminRoute
+    }
     '/portal/admin/audit': {
       id: '/portal/admin/audit'
       path: '/audit'
@@ -1266,6 +1304,7 @@ declare module '@tanstack/react-router' {
 
 interface PortalAdminRouteChildren {
   PortalAdminAuditRoute: typeof PortalAdminAuditRoute
+  PortalAdminComplianceRoute: typeof PortalAdminComplianceRoute
   PortalAdminIntegrationsRoute: typeof PortalAdminIntegrationsRoute
   PortalAdminMasterRoute: typeof PortalAdminMasterRoute
   PortalAdminModulesRoute: typeof PortalAdminModulesRoute
@@ -1273,6 +1312,7 @@ interface PortalAdminRouteChildren {
   PortalAdminOrganizationsRoute: typeof PortalAdminOrganizationsRoute
   PortalAdminProfileRoute: typeof PortalAdminProfileRoute
   PortalAdminReportsRoute: typeof PortalAdminReportsRoute
+  PortalAdminRoadmapRoute: typeof PortalAdminRoadmapRoute
   PortalAdminRolesRoute: typeof PortalAdminRolesRoute
   PortalAdminSettingsRoute: typeof PortalAdminSettingsRoute
   PortalAdminUsersRoute: typeof PortalAdminUsersRoute
@@ -1282,6 +1322,7 @@ interface PortalAdminRouteChildren {
 
 const PortalAdminRouteChildren: PortalAdminRouteChildren = {
   PortalAdminAuditRoute: PortalAdminAuditRoute,
+  PortalAdminComplianceRoute: PortalAdminComplianceRoute,
   PortalAdminIntegrationsRoute: PortalAdminIntegrationsRoute,
   PortalAdminMasterRoute: PortalAdminMasterRoute,
   PortalAdminModulesRoute: PortalAdminModulesRoute,
@@ -1289,6 +1330,7 @@ const PortalAdminRouteChildren: PortalAdminRouteChildren = {
   PortalAdminOrganizationsRoute: PortalAdminOrganizationsRoute,
   PortalAdminProfileRoute: PortalAdminProfileRoute,
   PortalAdminReportsRoute: PortalAdminReportsRoute,
+  PortalAdminRoadmapRoute: PortalAdminRoadmapRoute,
   PortalAdminRolesRoute: PortalAdminRolesRoute,
   PortalAdminSettingsRoute: PortalAdminSettingsRoute,
   PortalAdminUsersRoute: PortalAdminUsersRoute,
